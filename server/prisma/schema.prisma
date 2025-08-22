@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum ExpenseCategory {
+  ADVANCE
+  MATERIAL
+  TRAVEL
+  OTHER
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  role     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Employee {
+  id        Int       @id @default(autoincrement())
+  name      String
+  phone     String?   @unique
+  active    Boolean   @default(true)
+  expenses  Expense[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([name])
+}
+
+model Expense {
+  id          Int              @id @default(autoincrement())
+  employeeId  Int
+  date        DateTime         @default(now())
+  amount      Decimal          @db.Decimal(12,2)
+  category    ExpenseCategory  @default(OTHER)
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  employee    Employee         @relation(fields: [employeeId], references: [id])
+
+  @@index([employeeId, date])
+  @@index([category])
+}
