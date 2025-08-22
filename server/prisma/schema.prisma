@@ -27,7 +27,7 @@ model User {
 model Employee {
   id        Int       @id @default(autoincrement())
   name      String
-  phone     String?   @unique
+  phone     String?
   active    Boolean   @default(true)
   expenses  Expense[]
   createdAt DateTime  @default(now())
