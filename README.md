@@ -57,7 +57,23 @@ expense-app/
 
 ## Getting Started
 
-## 🚀 Deploying to Vercel (Recommended)
+
+## 🌐 Environment Variables for Vercel
+
+When deploying your backend (server) to Vercel, set the following environment variables in your Vercel project settings:
+
+| Name          | Example Value                                      | Description                       |
+|---------------|----------------------------------------------------|-----------------------------------|
+| DATABASE_URL  | mysql://root:password@host:3306/expense_app        | Your database connection string   |
+| JWT_SECRET    | f9e31d8fcb7a4b7eabf6d9e78c3e4a52f96f19a9b9d44e3fa87e4d1b7c2e0f61 | Secret for signing JWT tokens     |
+| PORT          | 4000                                               | (Optional) Port for backend server|
+
+**How to set these on Vercel:**
+1. Go to your project in the Vercel dashboard.
+2. Click on **Settings** > **Environment Variables**.
+3. Add each variable above, using your own values for security.
+4. Redeploy your backend after saving.
+
 
 You can host both the frontend and backend for free using [Vercel](https://vercel.com/). Vercel supports monorepos and makes deployment simple:
 
