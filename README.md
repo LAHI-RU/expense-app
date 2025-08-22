@@ -1,4 +1,9 @@
+
 # Expense App
+
+> **Effortless Expense Management for Teams**
+>
+> Take control of your business spending with ExpenseApp. Track, approve, and report expenses in real time. Empower your employees, simplify reimbursements, and gain actionable insights—all in one secure, easy-to-use platform.
 
 A full-stack expense management application for tracking, reporting, and managing employee expenses. Built with a modern tech stack for scalability and maintainability.
 
@@ -51,6 +56,25 @@ expense-app/
 - `prisma/` — Prisma schema, migrations, and seed data
 
 ## Getting Started
+
+## 🚀 Deploying to Vercel (Recommended)
+
+You can host both the frontend and backend for free using [Vercel](https://vercel.com/). Vercel supports monorepos and makes deployment simple:
+
+1. **Push your code to GitHub** (if not already).
+2. **Sign up at [vercel.com](https://vercel.com/)** and connect your GitHub account.
+3. **Import your repository** into Vercel.
+4. When prompted, set up two projects:
+  - **Frontend:** Set the root directory to `client`, build command to `npm run build`, and output directory to `dist`.
+  - **Backend:** Set the root directory to `server`, build command to `npm install` (or `npm run build` if you have a build step), and leave output directory blank for Node.js.
+5. **Set environment variables** for your backend (e.g., database connection string) in the Vercel dashboard.
+6. **Deploy!** Vercel will build and host both apps. You’ll get live URLs for both frontend and backend.
+
+**Note:**
+- The provided `vercel.json` files help Vercel detect and deploy each part of your app correctly.
+- Update your frontend API URLs to point to the deployed backend if needed.
+
+---
 
 ### Prerequisites
 - Node.js (v18+ recommended)

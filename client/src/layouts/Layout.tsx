@@ -23,10 +23,19 @@ const navLinks = [
     },
 ];
 
+import { useEffect } from 'react';
+
 export default function Layout() {
     const nav = useNavigate();
     const location = useLocation();
     const logout = () => { localStorage.removeItem('token'); nav('/login'); };
+
+    useEffect(() => {
+        // If not logged in, redirect to welcome page
+        if (!localStorage.getItem('token')) {
+            nav('/', { replace: true });
+        }
+    }, [nav]);
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
