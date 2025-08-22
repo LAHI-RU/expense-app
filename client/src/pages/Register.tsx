@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { login } from '../api/auth';
+import { register } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 
 import { useEffect } from 'react';
-export default function Login() {
+export default function Register() {
     const nav = useNavigate();
-    const [email, setEmail] = useState('admin@example.com');
-    const [password, setPassword] = useState('Admin@123');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState<string | undefined>();
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('token')) nav('/app');
@@ -16,10 +18,12 @@ export default function Login() {
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(undefined);
+        setSuccess(false);
         try {
-            const { token } = await login(email, password);
+            const { token } = await register(name, email, password);
             localStorage.setItem('token', token);
-            nav('/app');
+            setSuccess(true);
+            setTimeout(() => nav('/app'), 1000);
         } catch (e) {
             if (
                 typeof e === 'object' &&
@@ -29,7 +33,7 @@ export default function Login() {
             ) {
                 setError((e as { response: { data: { message: string } } }).response.data.message);
             } else {
-                setError('Login failed');
+                setError('Registration failed');
             }
         }
     };
@@ -37,11 +41,14 @@ export default function Login() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
             <form onSubmit={onSubmit} className="bg-white p-6 rounded shadow w-full max-w-sm space-y-3">
-                <h2 className="text-xl font-semibold">Sign in</h2>
+                <h2 className="text-xl font-semibold">Create Account</h2>
                 {error && <p className="text-red-600">{error}</p>}
+                {success && <p className="text-green-600">Account created! Redirecting...</p>}
+                <input value={name} onChange={e => setName(e.target.value)} type="text" placeholder="Name" className="border w-full p-2 rounded" />
                 <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="Email" className="border w-full p-2 rounded" />
                 <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" className="border w-full p-2 rounded" />
-                <button className="w-full bg-black text-white rounded p-2">Login</button>
+                <button className="w-full bg-blue-600 text-white rounded p-2">Register</button>
+                <div className="text-sm text-gray-500 text-center">Already have an account? <a href="/login" className="text-blue-600 hover:underline">Login</a></div>
             </form>
         </div>
     );

@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import Login from './pages/Login.tsx'
+import Register from './pages/Register.tsx'
+import Welcome from './pages/Welcome.tsx'
 import Layout from './layouts/Layout.tsx'
 import Dashboard from './pages/Dashboard.tsx'
 import Employees from './pages/Employees.tsx'
@@ -14,9 +16,11 @@ import NotFound from './pages/NotFound.tsx'
 const qc = new QueryClient();
 
 const router = createBrowserRouter([
+  { path: '/', element: <Welcome /> },
   { path: '/login', element: <Login /> },
+  { path: '/register', element: <Register /> },
   {
-    path: '/', element: <Layout />, children: [
+    path: '/app', element: <Layout />, children: [
       { index: true, element: <Dashboard /> },
       { path: 'employees', element: <Employees /> },
       { path: 'expenses', element: <Expenses /> },

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { login } from '../controllers/auth.controller';
+import { login, register } from '../controllers/auth.controller';
 import { auth } from '../middlewares/auth';
 import {
     createEmployee, listEmployees, getEmployee, updateEmployee, deleteEmployee
@@ -13,6 +13,7 @@ import { exportPDF } from '../controllers/exportPDF.controller';
 const r = Router();
 
 // Auth
+r.post('/auth/register', register);
 r.post('/auth/login', login);
 
 // Employees
